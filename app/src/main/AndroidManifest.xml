@@ -14,6 +14,7 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true"/>
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -60,10 +61,10 @@
         </activity>
         <activity
             android:name="fanvu.easygoer.ListTripActivity"
-            android:label="@string/title_activity_list_trip"></activity>
+            android:label="@string/title_activity_list_trip"/>
         <activity
             android:name="fanvu.easygoer.PostTripActivity"
-            android:label="@string/title_activity_post_trip"></activity>
+            android:label="@string/title_activity_post_trip"/>
 
         <!-- Main Activity -->
         <activity
@@ -72,10 +73,10 @@
             android:label="@string/app_name">
         </activity>
 
-        <!--   RegisterActivity -->
+        <!-- RegisterActivity -->
         <activity
-            android:name="fanvu.easygoer.gcm.RegisterActivity"
-            android:label="@string/title_activity_list_trip"></activity>
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_list_trip"/>
 
         <receiver
             android:name="com.google.android.gcm.GCMBroadcastReceiver"
@@ -93,11 +94,16 @@
 
         <service android:name="fanvu.easygoer.GCMIntentService"/>
 
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <!--
+     ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
+
+        <activity android:name="fanvu.easygoer.activity.NotificationActivity">
+        </activity>
     </application>
 
 </manifest>

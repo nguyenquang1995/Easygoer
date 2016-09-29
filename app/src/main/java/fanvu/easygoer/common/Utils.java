@@ -1,6 +1,7 @@
 package fanvu.easygoer.common;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,9 +10,11 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import fanvu.easygoer.activity.NotificationActivity;
 import fanvu.easygoer.gcm.R;
 
 /**
@@ -24,11 +27,20 @@ public class Utils {
     public static int PADDING = TEXT_SIZE / 2;
     public static Bitmap sBitmap;
 
-    public static void addView(Context context, int number) {
+    public static void addView(final Context context, int number) {
         WindowManager windowManager = (WindowManager) context.getSystemService
             (Context.WINDOW_SERVICE);
         chatHead = new ImageView(context);
         chatHead.setImageDrawable(drawNumber(context, number));
+        chatHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(context);
+                Intent intent = new Intent(context, NotificationActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
             CHAT_SIZE,
             CHAT_SIZE,
@@ -60,7 +72,7 @@ public class Utils {
         paint2.setColor(Color.RED);
         paint2.setAntiAlias(true);
         paint2.setTextSize(TEXT_SIZE);
-        canvas.drawCircle(PADDING, TEXT_SIZE, TEXT_SIZE, paint2);
+        canvas.drawCircle(TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, paint2);
         canvas.drawText(text,PADDING / 2, TEXT_SIZE * 3 / 2, paint);
         BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), sBitmap);
         result.recycle();
