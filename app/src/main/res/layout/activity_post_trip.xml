@@ -1,0 +1,255 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg1"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:scrollbars="vertical"
+            tools:context="fanvu.easygoer.LoginActivity">
+
+    <LinearLayout
+        android:id="@+id/firstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_start_place"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/string_ward"/>
+
+        <EditText
+            android:id="@+id/wardStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/string_ward"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/counter_text_color"
+            android:textSize="17dp"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_dictrict"/>
+
+        <EditText
+            android:id="@+id/dictricStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/string_dictrict"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/counter_text_color"
+            android:textSize="17dp"/>
+
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_province"/>
+
+        <EditText
+            android:id="@+id/provinceStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/string_province"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/counter_text_color"
+            android:textSize="17dp"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/string_end_place"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/string_ward"/>
+
+        <EditText
+            android:id="@+id/wardEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/string_ward"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/counter_text_color"
+            android:textSize="17dp"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_dictrict"/>
+
+        <EditText
+            android:id="@+id/dictricEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/string_dictrict"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/counter_text_color"
+            android:textSize="17dp"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_province"/>
+
+        <EditText
+            android:id="@+id/provinceEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/string_province"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/counter_text_color"
+            android:textSize="17dp"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_time"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/timeStart"
+                android:background="@drawable/style_edittext"
+                style="@style/AppTextFont"
+                android:text="tét"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"/>
+            <Button
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:id="@+id/buttonDatePicker"
+                android:background="@drawable/date_picker"/>
+        </RelativeLayout>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_price"/>
+
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:textSize="17dp"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/Black"/>
+
+        <TextView
+            style="@style/AppTextFont"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_comment"/>
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_edittext"
+            android:textSize="17dp"
+            android:inputType="text"
+            android:maxLines="3"
+            android:singleLine="true"
+            android:textColor="@color/Black"/>
+
+        <Button
+            android:id="@+id/post_trip_button"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/blue_button"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:text="@string/action_post_trip"/>
+
+    </LinearLayout>
+
+
+</ScrollView>

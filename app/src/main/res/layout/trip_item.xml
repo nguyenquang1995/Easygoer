@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+    <!--<ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileImage"
+        android:src="@drawable/ic_launcher"
+        android:layout_centerVertical="true"
+        />
+-->
+    <RelativeLayout
+        android:id="@+id/info_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. "
+            android:textColor="@color/RoyalBlue"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/index"
+            android:text="Driver Name"
+            android:textColor="@color/RoyalBlue"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/item_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/index"
+            android:layout_marginTop="10dp"
+            android:text="01678226333"
+            android:textColor="@color/Black"
+            android:textSize="17dp"/>
+
+        <ImageView
+            android:id="@+id/imgPhone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/phone_icon"
+            />
+
+        <TextView
+            android:id="@+id/time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_phone"
+            android:layout_marginTop="5dp"
+            android:text="time Start"
+            android:textColor="@color/Black"
+            android:textSize="17dp"/>
+
+        <TextView
+            android:id="@+id/place_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time_start"
+            android:layout_marginTop="5dp"
+            android:text="place Start"
+            android:textColor="@color/Black"
+            android:textSize="17dp"/>
+
+        <TextView
+            android:id="@+id/place_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/place_start"
+            android:layout_marginTop="5dp"
+            android:text="place End"
+            android:textColor="@color/Black"
+            android:textSize="17dp"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/place_end"
+            android:layout_marginTop="5dp"
+            android:text="@string/string_price"
+            android:textColor="@color/Black"
+            android:textSize="17dp"/>
+
+
+        <TextView
+            android:id="@+id/item_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/price"
+            android:layout_marginTop="5dp"
+            android:text="@string/string_comment"
+            android:textColor="@color/Black"
+            android:textSize="17dp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/silver">
+    </View>
+
+</RelativeLayout>
