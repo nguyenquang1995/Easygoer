@@ -23,11 +23,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import fanvu.easygoer.asynctask.GcmSenderAsyncTask;
 import fanvu.easygoer.common.CheckConnect;
 import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
 import fanvu.easygoer.config.Config;
+import fanvu.easygoer.gcm.GcmSender;
 import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.gcm.RegisterActivity;
 //import fanvu.easygoer.common.GPSTracker;
@@ -53,11 +56,12 @@ public class LoginActivity extends Activity implements OnClickListener {
     private String mWard2 = "";
     private SharedPreferences mPreferences;
 //	MobileWSServiceLocator locator = new MobileWSServiceLocator();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _context = LoginActivity.this;
+        GcmSenderAsyncTask asyncTask = new GcmSenderAsyncTask();
+        asyncTask.execute();
+       /* _context = LoginActivity.this;
         _checkConnect = new CheckConnect(_context);
         pDialog = new ProgressDialog(_context);
         //gps = new GPSTracker(_context);
@@ -76,7 +80,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         mSignInButton.setOnClickListener(this);
-        mRegisterTextView.setOnClickListener(this);
+        mRegisterTextView.setOnClickListener(this);*/
     }
 
     @Override
