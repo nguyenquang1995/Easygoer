@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.R;
 import fanvu.easygoer.TripInfo;
 
 import java.util.ArrayList;

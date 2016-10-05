@@ -24,7 +24,7 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import fanvu.easygoer.gcm.Config;
-import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.R;
 
 public class Controller extends Application{
 

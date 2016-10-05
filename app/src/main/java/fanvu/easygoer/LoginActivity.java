@@ -3,12 +3,16 @@ package fanvu.easygoer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,8 +31,9 @@ import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
 import fanvu.easygoer.common.Utils;
 import fanvu.easygoer.config.Config;
-import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.gcm.QuickstartPreferences;
 import fanvu.easygoer.gcm.RegisterActivity;
+import fanvu.easygoer.gcm.service.RegistrationIntentService;
 //import fanvu.easygoer.common.GPSTracker;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -51,7 +56,9 @@ public class LoginActivity extends Activity implements OnClickListener {
     private String mWard1 = "";
     private String mWard2 = "";
     private SharedPreferences mPreferences;
-//	MobileWSServiceLocator locator = new MobileWSServiceLocator();
+    //	MobileWSServiceLocator locator = new MobileWSServiceLocator();
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    private boolean isReceiverRegistered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,39 @@ public class LoginActivity extends Activity implements OnClickListener {
         password = (EditText) findViewById(R.id.password);
         mSignInButton.setOnClickListener(this);
         mRegisterTextView.setOnClickListener(this);
+    }
+
+    private void init() {
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(context);
+                boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences
+                    .SENT_TOKEN_TO_SERVER, false);
+                if (sentToken) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.gcm_send_message),
+                        Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.token_error_message),
+                        Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        registerReceiver();
+        if (Utils.checkPlayServices(this)) {
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+    }
+
+    private void registerReceiver() {
+        if (!isReceiverRegistered) {
+            LocalBroadcastManager.getInstance(this)
+                .registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter
+                    (QuickstartPreferences.REGISTRATION_COMPLETE));
+            isReceiverRegistered = true;
+        }
     }
 
     @Override

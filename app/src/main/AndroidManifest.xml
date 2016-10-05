@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="fanvu.easygoer.gcm"
+<manifest package="fanvu.easygoer"
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="3"
           android:versionName="1.3">
@@ -75,7 +75,7 @@
 
         <!-- RegisterActivity -->
         <activity
-            android:name=".RegisterActivity"
+            android:name=".gcm.RegisterActivity"
             android:label="@string/title_activity_list_trip"/>
 
         <receiver
@@ -91,9 +91,35 @@
                 <category android:name="fanvu.easygoer.gcm"/>
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.example.gcm"/>
+            </intent-filter>
+        </receiver>
         <service android:name="fanvu.easygoer.GCMIntentService"/>
-
+        <service
+            android:name="fanvu.easygoer.gcm.service.MyGcmListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="fanvu.easygoer.gcm.service.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+            </intent-filter>
+        </service>
+        <service android:name="fanvu.easygoer.gcm.service.RegistrationIntentService"
+                 android:exported="false">
+        </service>
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.

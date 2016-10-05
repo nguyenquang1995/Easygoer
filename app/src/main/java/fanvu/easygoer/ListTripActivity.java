@@ -34,7 +34,7 @@ import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.R;
 
 public class ListTripActivity extends Activity {
 

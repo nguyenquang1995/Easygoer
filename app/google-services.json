@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "822641533922",
+    "firebase_url": "https://easygoer2-df457.firebaseio.com",
+    "project_id": "easygoer2-df457",
+    "storage_bucket": "easygoer2-df457.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822641533922:android:f6b504b415e07a45",
+        "android_client_info": {
+          "package_name": "fanvu.easygoer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822641533922-7cguojo04m71q5o2jka3m3q3l84r8c7p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fanvu.easygoer",
+            "certificate_hash": "17BA675F8B2455DC9422B10ED43587CF48DDC8F1"
+          }
+        },
+        {
+          "client_id": "822641533922-c5v9jjea9pfg0a7krd3se5pil5m1p6nq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA47IvpnyKV2Am2HagfHNXW6SkBwl7Zo2k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822641533922-c5v9jjea9pfg0a7krd3se5pil5m1p6nq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

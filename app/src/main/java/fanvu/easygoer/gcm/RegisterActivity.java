@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import fanvu.easygoer.Controller;
 import fanvu.easygoer.MainActivity;
+import fanvu.easygoer.R;
 
 public class RegisterActivity extends Activity {
 

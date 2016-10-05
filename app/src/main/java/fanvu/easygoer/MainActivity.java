@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.android.gcm.GCMRegistrar;
 
 import fanvu.easygoer.gcm.Config;
-import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.R;
 
 public class MainActivity extends Activity {
     // label to display gcm messages
