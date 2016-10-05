@@ -3,7 +3,7 @@ package fanvu.easygoer.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
-import fanvu.easygoer.R;
+import fanvu.easygoer.gcm.R;
 
 public class NotificationActivity extends Activity {
     @Override

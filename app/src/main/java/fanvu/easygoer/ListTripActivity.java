@@ -34,7 +34,7 @@ import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import fanvu.easygoer.R;
+import fanvu.easygoer.gcm.R;
 
 public class ListTripActivity extends Activity {
 
@@ -50,6 +50,37 @@ public class ListTripActivity extends Activity {
     Boolean isConnectionExist = false;
     CheckConnect _checkConnect;
     private static String TAG = "ListTripActivity";
+
+
+    @Override
+    protected void onPause() {
+        android.util.Log.d(TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        android.util.Log.d(TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        android.util.Log.d(TAG, "onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        android.util.Log.d(TAG, "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        android.util.Log.d(TAG, "onStop");
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

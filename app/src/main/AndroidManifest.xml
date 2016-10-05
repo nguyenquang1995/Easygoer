@@ -1,47 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="fanvu.easygoer"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="3"
-          android:versionName="1.3">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fanvu.easygoer.gcm"
+    android:versionCode="3"
+    android:versionName="1.3">
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="16"/>
+        android:targetSdkVersion="16" />
 
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
-        android:smallScreens="true"/>
+        android:smallScreens="true" />
+    <!--for android badge-->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/>
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!--for Samsung badge-->
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
 
-    <permission
-        android:name="fanvu.easygoer.permission.C2D_MESSAGE"
-        android:protectionLevel="signature"/>
+    <!--for htc badge-->
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
 
-    <uses-permission android:name="fanvu.easygoer.permission.C2D_MESSAGE"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!--for sony badge-->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+
+    <!--for apex badge-->
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <permission android:name="fanvu.easygoer.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="fanvu.easygoer.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="fanvu.easygoer.Controller"
@@ -54,82 +66,51 @@
             android:label="@string/app_name"
             android:theme="@style/LoginTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="fanvu.easygoer.ListTripActivity"
-            android:label="@string/title_activity_list_trip"/>
+            android:label="@string/title_activity_list_trip"></activity>
         <activity
             android:name="fanvu.easygoer.PostTripActivity"
-            android:label="@string/title_activity_post_trip"/>
+            android:label="@string/title_activity_post_trip"></activity>
 
         <!-- Main Activity -->
         <activity
             android:name="fanvu.easygoer.MainActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
         </activity>
 
-        <!-- RegisterActivity -->
+        <!--   RegisterActivity -->
         <activity
-            android:name=".gcm.RegisterActivity"
-            android:label="@string/title_activity_list_trip"/>
+            android:name="fanvu.easygoer.gcm.RegisterActivity"
+            android:label="@string/title_activity_list_trip"></activity>
 
         <receiver
             android:name="com.google.android.gcm.GCMBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
 
                 <!-- Receives the actual messages. -->
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <!-- Receives the registration id. -->
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="fanvu.easygoer.gcm"/>
+                <category android:name="fanvu.easygoer.gcm" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <category android:name="com.example.gcm"/>
-            </intent-filter>
-        </receiver>
-        <service android:name="fanvu.easygoer.GCMIntentService"/>
-        <service
-            android:name="fanvu.easygoer.gcm.service.MyGcmListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name="fanvu.easygoer.gcm.service.MyInstanceIDListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
-            </intent-filter>
-        </service>
-        <service android:name="fanvu.easygoer.gcm.service.RegistrationIntentService"
-                 android:exported="false">
-        </service>
-        <!--
-     ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
+
+        <service android:name="fanvu.easygoer.GCMIntentService" />
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-
-        <activity android:name="fanvu.easygoer.activity.NotificationActivity">
-        </activity>
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

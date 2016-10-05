@@ -16,7 +16,7 @@
         android:queryBackground="@color/DimGray"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"></SearchView>
 
     <ListView
         android:layout_below="@id/searchview"

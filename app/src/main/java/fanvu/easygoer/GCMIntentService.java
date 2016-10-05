@@ -10,7 +10,7 @@ import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 
 import fanvu.easygoer.gcm.Config;
-import fanvu.easygoer.R;
+import fanvu.easygoer.gcm.R;
 
 public class GCMIntentService extends GCMBaseIntentService {
 

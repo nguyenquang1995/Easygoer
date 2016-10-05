@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import fanvu.easygoer.R;
+import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.activity.NotificationActivity;
 
 /**

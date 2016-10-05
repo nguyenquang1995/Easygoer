@@ -3,17 +3,15 @@ package fanvu.easygoer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,11 +27,9 @@ import java.util.ArrayList;
 import fanvu.easygoer.common.CheckConnect;
 import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
-import fanvu.easygoer.common.Utils;
 import fanvu.easygoer.config.Config;
-import fanvu.easygoer.gcm.QuickstartPreferences;
+import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.gcm.RegisterActivity;
-import fanvu.easygoer.gcm.service.RegistrationIntentService;
 //import fanvu.easygoer.common.GPSTracker;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -56,14 +52,11 @@ public class LoginActivity extends Activity implements OnClickListener {
     private String mWard1 = "";
     private String mWard2 = "";
     private SharedPreferences mPreferences;
-    //	MobileWSServiceLocator locator = new MobileWSServiceLocator();
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
-    private boolean isReceiverRegistered;
+//	MobileWSServiceLocator locator = new MobileWSServiceLocator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Utils.addView(getApplicationContext(), 15);
         _context = LoginActivity.this;
         _checkConnect = new CheckConnect(_context);
         pDialog = new ProgressDialog(_context);
@@ -86,43 +79,23 @@ public class LoginActivity extends Activity implements OnClickListener {
         mRegisterTextView.setOnClickListener(this);
     }
 
-    private void init() {
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                SharedPreferences sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(context);
-                boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences
-                    .SENT_TOKEN_TO_SERVER, false);
-                if (sentToken) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.gcm_send_message),
-                        Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.token_error_message),
-                        Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        registerReceiver();
-        if (Utils.checkPlayServices(this)) {
-            Intent intent = new Intent(this, RegistrationIntentService.class);
-            startService(intent);
-        }
-    }
-
-    private void registerReceiver() {
-        if (!isReceiverRegistered) {
-            LocalBroadcastManager.getInstance(this)
-                .registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter
-                    (QuickstartPreferences.REGISTRATION_COMPLETE));
-            isReceiverRegistered = true;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Utils.sBitmap.recycle();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private AlertDialog createDialogError(String msg) {
@@ -306,6 +279,36 @@ public class LoginActivity extends Activity implements OnClickListener {
                 }
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        android.util.Log.d(TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        android.util.Log.d(TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        android.util.Log.d(TAG, "onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        android.util.Log.d(TAG, "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        android.util.Log.d(TAG, "onStop");
+        super.onStop();
     }
 
     public String getRespose(String url) {

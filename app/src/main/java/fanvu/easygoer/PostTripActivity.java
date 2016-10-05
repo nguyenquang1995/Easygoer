@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import fanvu.easygoer.R;
+import fanvu.easygoer.gcm.R;
 
 public class PostTripActivity extends Activity implements View.OnClickListener {
 
