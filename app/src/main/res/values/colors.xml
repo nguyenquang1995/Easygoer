@@ -1,5 +1,7 @@
 <resources>
-
+    <color name="colorPrimary">#4b82ff</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
     <color name="greenStart">#ff33dd44</color>
     <color name="greenMid">#ff0A8815</color>
     <color name="greenEnd">#ff1da130</color>
@@ -162,9 +164,9 @@
     <color name="Black">#000000</color>
     <color name="list_item_title">#fff</color>
     <color name="colorList_ff9800">#ff9800</color>
-   <!--  <color name="list_background">#303030</color> -->
+    <!--  <color name="list_background">#303030</color> -->
     <color name="list_background">#303030</color>
-    
+
     <color name="list_background_pressed">#ff9800</color>
     <color name="list_divider">#272727</color>
     <color name="counter_text_bg">#626262</color>

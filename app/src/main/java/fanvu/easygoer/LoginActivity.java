@@ -10,8 +10,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,14 +21,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fanvu.easygoer.asynctask.GcmSenderAsyncTask;
 import fanvu.easygoer.common.CheckConnect;
 import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
 import fanvu.easygoer.config.Config;
-import fanvu.easygoer.gcm.GcmSender;
 import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.gcm.RegisterActivity;
 //import fanvu.easygoer.common.GPSTracker;
@@ -55,13 +51,12 @@ public class LoginActivity extends Activity implements OnClickListener {
     private String mWard1 = "";
     private String mWard2 = "";
     private SharedPreferences mPreferences;
-//	MobileWSServiceLocator locator = new MobileWSServiceLocator();
+
+    //	MobileWSServiceLocator locator = new MobileWSServiceLocator();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GcmSenderAsyncTask asyncTask = new GcmSenderAsyncTask();
-        asyncTask.execute();
-       /* _context = LoginActivity.this;
+        _context = LoginActivity.this;
         _checkConnect = new CheckConnect(_context);
         pDialog = new ProgressDialog(_context);
         //gps = new GPSTracker(_context);
@@ -80,26 +75,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         mSignInButton.setOnClickListener(this);
-        mRegisterTextView.setOnClickListener(this);*/
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        mRegisterTextView.setOnClickListener(this);
     }
 
     private AlertDialog createDialogError(String msg) {

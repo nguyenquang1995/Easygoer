@@ -1,8 +1,8 @@
 package fanvu.easygoer.gcm;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +34,7 @@ public class GcmSender {
         "APA91bEzrn7fBhsnQNEZ2fnMDCeIy26vQozPo5AoJDlcPW2zpms-Vk-iG74OcjAvdgQGs9aCM75O_CrzxBMmC9JIOUVZG7mzvCieTREu0Ib4p9AkfkoFAOs";
     public static final String API_KEY = "AIzaSyCqSs95yw1uqYXBd1-uOpU7xK0KWGAASlM";
 
-    public static void main(String[] args) {
+    /*public static void sendMessage(String[] args) {
         try {
             // Prepare JSON containing the GCM message content. What to send and where to send.
             JSONObject jGcmData = new JSONObject();
@@ -65,40 +65,62 @@ public class GcmSender {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+
+    public static void sendMessageToClient(String[] args)
+        throws JSONException, IOException {
+        JSONObject jGcmData = new JSONObject();
+        JSONObject jData = new JSONObject();
+        jData.put("message", args[0].trim());
+        if (args.length > 1 && args[1] != null) {
+            jGcmData.put("to", args[1].trim());
+        } else {
+            jGcmData.put("to", "/topics/global");
+        }
+        jGcmData.put("data", jData);
+        URL url = new URL("https://android.googleapis.com/gcm/send");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Authorization", "key=" + API_KEY);
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        // Send GCM message content.
+        OutputStream outputStream = conn.getOutputStream();
+        outputStream.write(jGcmData.toString().getBytes());
+        // Read GCM response.
+        InputStream inputStream = conn.getInputStream();
+        String resp = IOUtils.toString(inputStream);
     }
 
-    public static void sendToMobiles(String message, List<String> regIds) {
+    public static void sendToMobiles(String message, List<String> regIds)
+        throws JSONException, IOException {
         if (regIds != null && regIds.size() > 0) {
             for (String regId : regIds) {
                 // Thực hiện gửi tin tới từng user có regId tương ứng.
                 if (regId == null) {
                     break;
                 }
-                try {
-                    // Prepare JSON containing the GCM message content. What to send and where to send.
-                    JSONObject jGcmData = new JSONObject();
-                    JSONObject jData = new JSONObject();
-                    jData.put("message", message);
-                    jGcmData.put("to", regId);
-                    // What to send in GCM message.
-                    jGcmData.put("data", jData);
-                    // Create connection to send GCM Message request.
-                    URL url = new URL("https://android.googleapis.com/gcm/send");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestProperty("Authorization", "key=" + API_KEY);
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestMethod("POST");
-                    conn.setDoOutput(true);
-                    // Send GCM message content.
-                    OutputStream outputStream = conn.getOutputStream();
-                    outputStream.write(jGcmData.toString().getBytes());
-                    System.out.println("data sent:..." + jGcmData.toString());
-                    // Read GCM response.
-                    InputStream inputStream = conn.getInputStream();
-                    String resp = IOUtils.toString(inputStream);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                // Prepare JSON containing the GCM message content. What to send and where to send.
+                JSONObject jGcmData = new JSONObject();
+                JSONObject jData = new JSONObject();
+                jData.put("message", message);
+                jGcmData.put("to", regId);
+                // What to send in GCM message.
+                jGcmData.put("data", jData);
+                // Create connection to send GCM Message request.
+                URL url = new URL("https://android.googleapis.com/gcm/send");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("Authorization", "key=" + API_KEY);
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+                // Send GCM message content.
+                OutputStream outputStream = conn.getOutputStream();
+                outputStream.write(jGcmData.toString().getBytes());
+                System.out.println("data sent:..." + jGcmData.toString());
+                // Read GCM response.
+                InputStream inputStream = conn.getInputStream();
+                String resp = IOUtils.toString(inputStream);
                 // end of sending message to one regId.
             }
         }
