@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +31,7 @@ import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.gcm.RegisterActivity;
 //import fanvu.easygoer.common.GPSTracker;
 
-public class LoginActivity extends Activity implements OnClickListener {
+public class LoginActivity extends AppCompatActivity implements OnClickListener {
     private Button mSignInButton;
     private TextView mRegisterTextView;
     private EditText password;

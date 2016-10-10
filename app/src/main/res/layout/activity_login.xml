@@ -1,101 +1,98 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="fanvu.easygoer.LoginActivity"
-    android:background="@drawable/bg2">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg2"
+                tools:context="fanvu.easygoer.LoginActivity">
 
     <LinearLayout
+        android:id="@+id/app_name_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/app_name_layout"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Easy"
-            android:textStyle="bold"
             android:textColor="@color/Indigo"
             android:textSize="60dp"
+            android:textStyle="bold"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Goer"
-            android:textStyle="bold"
             android:textColor="@color/red"
             android:textSize="60dp"
+            android:textStyle="bold"
             />
     </LinearLayout>
 
     <LinearLayout
         style="@style/LoginFormContainer"
-        android:layout_gravity="center"
         android:layout_below="@id/app_name_layout"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
-        <!-- Add message notification 28/8/2016 -->
-        <TextView android:id="@+id/lblMessage"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dip"
-            android:layout_margin="10dip"
-            android:textColor="#000000"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/username"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/string_phone_number"
+                android:maxLines="1"
+                android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/style_edittext"
-            android:textColor="@color/colorList_ff9800"
-            android:hint="@string/string_phone_number"
-            android:textColorHint="@color/counter_text_color"
-            android:inputType="text"
-            android:maxLines="1"
-            android:singleLine="true" />
+            android:gravity="center">
 
-        <EditText
-            android:id="@+id/password"
-            style="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/style_edittext"
-            android:hint="@string/prompt_password"
-            android:imeActionId="@+id/login"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:textColorHint="@color/counter_text_color"
-            android:imeOptions="actionUnspecified"
-            android:inputType="textPassword"
-            android:textColor="@color/colorList_ff9800"
-            android:maxLines="1"
-            android:singleLine="true" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/sign_in_button"
             style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="@drawable/blue_button"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/action_sign_in_register" />
+            android:text="@string/action_sign_in_register"/>
 
         <TextView
+            android:id="@+id/register_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:id="@+id/register_textView"
-            android:textStyle="italic"
-            android:layout_marginTop="30dp"
-            android:textColor="@color/red"
             android:layout_gravity="center_horizontal"
-            android:text="@string/action_register"/>
+            android:layout_marginTop="30dp"
+            android:text="@string/action_register"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 
