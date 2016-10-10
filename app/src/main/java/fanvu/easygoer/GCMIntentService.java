@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 
+import fanvu.easygoer.common.Utils;
 import fanvu.easygoer.gcm.Config;
 import fanvu.easygoer.gcm.R;
 
@@ -68,6 +69,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         aController.displayMessageOnScreen(context, message);
         // notifies user
         generateNotification(context, message);
+        Utils.addView(context);
     }
 
     /**

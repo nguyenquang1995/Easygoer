@@ -7,6 +7,8 @@
 
     <Button
         android:id="@+id/btn_test"
+        android:text="button_send_message"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

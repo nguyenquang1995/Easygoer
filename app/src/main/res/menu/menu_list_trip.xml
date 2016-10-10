@@ -1,15 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="fanvu.easygoer.LoginActivity">
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="fanvu.easygoer.LoginActivity">
 
     <item
         android:id="@+id/action_post_trip"
         android:title="@string/action_post_trip"
-        android:visible="true" />
+        android:visible="true"/>
 
     <item
         android:id="@+id/action_log_out"
         android:title="@string/action_log_out"
-        android:visible="true" />
+        android:visible="true"/>
 
 </menu>

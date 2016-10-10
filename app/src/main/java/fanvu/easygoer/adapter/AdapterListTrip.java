@@ -87,12 +87,14 @@ public class AdapterListTrip extends RecyclerView.Adapter<AdapterListTrip.TripVi
             txtPlaceEnd = (TextView) itemView.findViewById(R.id.place_end);
             txtPrice = (TextView) itemView.findViewById(R.id.price);
             txtComment = (TextView) itemView.findViewById(R.id.item_comment);
+            imgPhoneCall.setOnClickListener(this);
+            itemView.findViewById(R.id.btn_message).setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if(mItemTripClickListener != null) {
-                mItemTripClickListener.onItemClick(getAdapterPosition());
+            if (mItemTripClickListener != null) {
+                mItemTripClickListener.onItemClick(v, getAdapterPosition());
             }
         }
     }

@@ -33,13 +33,14 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
-
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="button_text">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

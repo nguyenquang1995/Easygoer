@@ -19,6 +19,7 @@ public class GcmSenderAsyncTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         mStringList.add(GcmSender.quang_reg_id);
+        //GcmSender.sendMessage(args);
         try {
             GcmSender.sendMessageToClient(args);
         } catch (JSONException e) {

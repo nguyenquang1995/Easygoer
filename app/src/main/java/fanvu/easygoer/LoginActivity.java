@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import fanvu.easygoer.asynctask.GcmSenderAsyncTask;
 import fanvu.easygoer.common.CheckConnect;
 import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
@@ -56,26 +55,18 @@ public class LoginActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
         _context = LoginActivity.this;
         _checkConnect = new CheckConnect(_context);
         pDialog = new ProgressDialog(_context);
         //gps = new GPSTracker(_context);
-        mPreferences = getSharedPreferences("my_data", MODE_PRIVATE);
-        boolean isLogin = mPreferences.getBoolean("isLogin", false);
-        android.util.Log.d(TAG, "Logged in: " + isLogin);
-        if (isLogin) {
-            mUserName = mPreferences.getString("username", "");
-            mPassword = mPreferences.getString("password", "");
-            mTypeOfUser = mPreferences.getString("typeOfUser", "");
-            doSignIn();
-        }
-        setContentView(R.layout.activity_login);
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
         mRegisterTextView = (TextView) findViewById(R.id.register_textView);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         mSignInButton.setOnClickListener(this);
         mRegisterTextView.setOnClickListener(this);
+        mPreferences = getPreferences(Context.MODE_PRIVATE);
     }
 
     private AlertDialog createDialogError(String msg) {
@@ -154,7 +145,6 @@ public class LoginActivity extends Activity implements OnClickListener {
             //goToAreanSelectorActivity();
         } else {
             if (isConnectionExist) {
-                //mLog.info("Login end success");
                 AsyncCallWS task = new AsyncCallWS();
                 task.execute();
             } else {
@@ -166,12 +156,11 @@ public class LoginActivity extends Activity implements OnClickListener {
     }
 
     private void doRegister() {
-        android.util.Log.d(TAG, "Register");
         Intent registerIntent = new Intent(this, RegisterActivity.class);
         startActivity(registerIntent);
     }
 
-    private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
+    public class AsyncCallWS extends AsyncTask<Void, Void, Void> {
         private String Content;
         private String Error = null;
 
@@ -217,9 +206,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                                 JSONObject jsonTrip = null;
                                 jsonTrip = jsonArray.getJSONObject(i);
                                 if (jsonTrip != null) {
-                                    TripInfo tripInfo;
-                                    // TripInfo(String tripId, String tripPrice, String timeStart, String placeStart, String placeEnd, String nameDriver, String phone, String comment) {
-                                    tripInfo = new TripInfo();
+                                    TripInfo tripInfo = new TripInfo();
                                     tripInfo.setTripId(jsonTrip.getString("tripId"));
                                     tripInfo.setTripPrice(jsonTrip.getString("tripPrice"));
                                     tripInfo.setTimeStart(jsonTrip.getString("timeStart"));
@@ -228,10 +215,6 @@ public class LoginActivity extends Activity implements OnClickListener {
                                     tripInfo.setNameDriver(jsonTrip.getString("nameDriver"));
                                     tripInfo.setPhone(jsonTrip.getString("phone"));
                                     tripInfo.setComment(jsonTrip.getString("comment"));
-//                                    tripInfo = new TripInfo(jsonTrip.getString("tripId"), jsonTrip.getString("tripPrice"),
-//                                            jsonTrip.getString("timeStart"), jsonTrip.getString("placeStart"),
-//                                            jsonTrip.getString("placeEnd"), jsonTrip.getString("nameDriver"),
-//                                            jsonTrip.getString("phone"), jsonTrip.getString("comment"));
                                     tripInfoArrayList.add(tripInfo);
                                 }
                             }
@@ -261,36 +244,6 @@ public class LoginActivity extends Activity implements OnClickListener {
         }
     }
 
-    @Override
-    protected void onPause() {
-        android.util.Log.d(TAG, "onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        android.util.Log.d(TAG, "onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        android.util.Log.d(TAG, "onStart");
-        super.onStart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        android.util.Log.d(TAG, "onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        android.util.Log.d(TAG, "onStop");
-        super.onStop();
-    }
-
     public String getRespose(String url) {
         String response = "";
         try {
@@ -300,11 +253,6 @@ public class LoginActivity extends Activity implements OnClickListener {
             client.AddHeader("wardid0", mWard0);
             client.AddHeader("wardid1", mWard1);
             client.AddHeader("wardid2", mWard2);
-//            client.AddParam("username", mUserName);
-//            client.AddParam("password", mPassword);
-//            client.AddParam("wardid0", mWard0);
-//            client.AddParam("wardid1", mWard1);
-//            client.AddParam("wardid2", mWard2);
             android.util.Log.d(TAG,
                 "getResponse: " + "Username: " + mUserName + " / password: " + mPassword +
                     " / wardID0: " + mWard0 + " / Wardid1: " + mWard1 + " / wardID2: " + mWard2);

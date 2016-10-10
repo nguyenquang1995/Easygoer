@@ -3,6 +3,7 @@ package fanvu.easygoer.common;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,8 +19,9 @@ import android.widget.ImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.Constant;
 import fanvu.easygoer.activity.NotificationActivity;
+import fanvu.easygoer.gcm.R;
 
 /**
  * Created by framgia on 27/09/2016.
@@ -32,7 +34,10 @@ public class Utils {
     public static int PADDING = TEXT_SIZE / 2;
     public static Bitmap sBitmap;
 
-    public static void addView(final Context context, int number) {
+    public static void addView(final Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constant
+            .SHARE_PREFERENCE, Context.MODE_PRIVATE);
+        int number = sharedPreferences.getInt(Constant.NUM_NOTIFICATION, 0);
         WindowManager windowManager = (WindowManager) context.getSystemService
             (Context.WINDOW_SERVICE);
         chatHead = new ImageView(context);
