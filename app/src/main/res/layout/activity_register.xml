@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bg1"
-    tools:context="fanvu.easygoer.LoginActivity">
+    tools:context="fanvu.easygoer.activity.LoginActivity">
 
     <LinearLayout
         style="@style/LoginFormContainer"
@@ -243,7 +243,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/blue_button"
+            android:background="@drawable/orange_custom_button"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
             android:text="@string/action_next" />

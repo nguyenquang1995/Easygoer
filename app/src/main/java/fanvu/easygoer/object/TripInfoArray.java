@@ -1,7 +1,9 @@
-package fanvu.easygoer;
+package fanvu.easygoer.object;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import fanvu.easygoer.object.TripInfo;
 
 /**
  * Created by SONY on 1/17/2016.

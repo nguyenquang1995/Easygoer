@@ -46,17 +46,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="fanvu.easygoer.LoginActivity"
+            android:name="fanvu.easygoer.activity.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/LoginTheme">
         </activity>
         <activity
-            android:name="fanvu.easygoer.ListTripActivity"
+            android:name="fanvu.easygoer.activity.ListTripActivity"
             android:label="@string/title_activity_list_trip"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name="fanvu.easygoer.PostTripActivity"
-            android:label="@string/title_activity_post_trip"/>
 
         <!-- Main Activity -->
         <activity
@@ -67,7 +64,8 @@
         <!-- RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_list_trip"/>
+            android:label="@string/title_register"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver
             android:name="com.google.android.gcm.GCMBroadcastReceiver"

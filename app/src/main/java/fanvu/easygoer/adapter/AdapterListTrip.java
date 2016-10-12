@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import fanvu.easygoer.TripInfo;
+import fanvu.easygoer.object.TripInfo;
 import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.mylistener.ItemTripClickListener;
 
@@ -19,7 +20,7 @@ import fanvu.easygoer.mylistener.ItemTripClickListener;
  */
 public class AdapterListTrip extends RecyclerView.Adapter<AdapterListTrip.TripViewHolder> {
     public Context mContext;
-    public List mList;
+    public List mList = new ArrayList();
     private ItemTripClickListener mItemTripClickListener;
 
     public AdapterListTrip(Context context, List list) {

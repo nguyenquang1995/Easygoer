@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import fanvu.easygoer.Constant;
-import fanvu.easygoer.ListTripActivity;
-import fanvu.easygoer.LoginActivity;
+import fanvu.easygoer.activity.ListTripActivity;
+import fanvu.easygoer.activity.LoginActivity;
 
 /**
  * Created by framgia on 09/10/2016.
@@ -21,7 +21,7 @@ public class CheckLoginAsyncTask extends AsyncTask<Context, Void, Void> {
         mContext = params[0];
         SharedPreferences mPreferences = mContext.getSharedPreferences(Constant.SHARE_PREFERENCE,
             Context.MODE_PRIVATE);
-        isLogin = mPreferences.getBoolean("isLogin", false);
+        isLogin = mPreferences.getBoolean(Constant.IS_LOGIN, false);
         return null;
     }
 

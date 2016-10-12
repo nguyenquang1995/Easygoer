@@ -23,7 +23,7 @@
     <string name="string_brand">Hãng xe</string>
     <string name="title_activity_list_trip">Danh sách chuyến đi</string>
     <string name="title_activity_post_trip">Đăng chuyến</string>
-
+    <string name="title_register">Register</string>
     <!--ListTripActivity-->
     <string name="action_post_trip">Đăng chuyến</string>
     <string name="action_log_out">Đăng xuất</string>
@@ -77,4 +77,10 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
     <string name="action_search">Search</string>
+    <string name="email_field">Email</string>
+    <string name="name_field">Full name</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_call">Call</string>
+    <string name="string_login_fail">Login fail</string>
+    <string name="string_search_fail">Search fail</string>
 </resources>

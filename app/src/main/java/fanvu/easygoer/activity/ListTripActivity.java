@@ -1,5 +1,6 @@
-package fanvu.easygoer;
+package fanvu.easygoer.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,9 +21,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import fanvu.easygoer.Constant;
 import fanvu.easygoer.fragment.HelpFragment;
 import fanvu.easygoer.fragment.HomeFragment;
 import fanvu.easygoer.fragment.PostripFragment;
+import fanvu.easygoer.fragment.SettingFragment;
 import fanvu.easygoer.gcm.R;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -31,7 +34,7 @@ public class ListTripActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private View navHeader;
     private ImageView imgNavHeaderBg, imgProfile;
-    private TextView txtName, txtWebsite;
+    private TextView txtName;
     private Toolbar toolbar;
     private static final String urlNavHeaderBg =
         "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
@@ -51,6 +54,9 @@ public class ListTripActivity extends AppCompatActivity {
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
+    private String mUserName;
+    private String mPassword;
+    private String mTypeOfUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +73,14 @@ public class ListTripActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navHeader = navigationView.getHeaderView(0);
         txtName = (TextView) navHeader.findViewById(R.id.name);
-        txtWebsite = (TextView) navHeader.findViewById(R.id.website);
         imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
         imgProfile = (ImageView) navHeader.findViewById(R.id.img_profile);
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.SHARE_PREFERENCE
+            , Context.MODE_PRIVATE);
+        mUserName = sharedPreferences.getString("username", "");
+        mPassword = sharedPreferences.getString("password", "");
+        mTypeOfUser = sharedPreferences.getString("typeOfUser", "");
         // load nav menu header data
         loadNavHeader();
         // initializing navigation menu
@@ -83,9 +93,7 @@ public class ListTripActivity extends AppCompatActivity {
     }
 
     private void loadNavHeader() {
-        txtName.setText("Ravi Tamada");
-        txtWebsite.setText("www.androidhive.info");
-        // loading header background image
+        txtName.setText(mTypeOfUser);
         Glide.with(this).load(R.drawable.nav_bg_menu)
             .crossFade()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -138,6 +146,9 @@ public class ListTripActivity extends AppCompatActivity {
             case 2:
                 HelpFragment helpFragment = new HelpFragment();
                 return helpFragment;
+            case 3:
+                SettingFragment settingFragment = new SettingFragment();
+                return settingFragment;
             default:
                 return new HomeFragment();
         }
@@ -156,6 +167,7 @@ public class ListTripActivity extends AppCompatActivity {
             new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    Intent intent;
                     switch (menuItem.getItemId()) {
                         case R.id.nav_home:
                             navItemIndex = 0;
@@ -175,11 +187,12 @@ public class ListTripActivity extends AppCompatActivity {
                             break;
                         case R.id.nav_logout:
                             SharedPreferences
-                                mPreferences = getSharedPreferences("my_data", MODE_PRIVATE);
+                                mPreferences =
+                                getSharedPreferences(Constant.SHARE_PREFERENCE, MODE_PRIVATE);
                             SharedPreferences.Editor edit = mPreferences.edit();
-                            edit.putBoolean("isLogin", false);
+                            edit.putBoolean(Constant.IS_LOGIN, false);
                             edit.commit();
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            intent = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(intent);
                             navItemIndex = 4;
                             CURRENT_TAG = TAG_LOGOUT;
@@ -231,34 +244,4 @@ public class ListTripActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
-
-    /*  @Override
-      public boolean onCreateOptionsMenu(Menu menu) {
-          getMenuInflater().inflate(R.menu.menu_list_trip, menu);
-          return true;
-      }
-
-      @Override
-      public boolean onOptionsItemSelected(MenuItem item) {
-          int id = item.getItemId();
-          if (id == R.id.action_post_trip) {
-              Intent intent = new Intent(ListTripActivity.this, PostTripActivity.class);
-              intent.putExtra("UserName", mUserName);
-              intent.putExtra("Password", mPassword);
-              intent.putExtra("TypeOfUser", mTypeOfUser);
-              startActivity(intent);
-              return true;
-          }
-          if (id == R.id.action_log_out) {
-              SharedPreferences mPreferences = getSharedPreferences("my_data", MODE_PRIVATE);
-              SharedPreferences.Editor edit = mPreferences.edit();
-              edit.putBoolean("isLogin", false);
-              edit.commit();
-              Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-              startActivity(intent);
-              return true;
-          }
-          return super.onOptionsItemSelected(item);
-      }
-  */
 }

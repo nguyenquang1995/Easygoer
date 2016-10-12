@@ -6,4 +6,12 @@ package fanvu.easygoer;
 public class Constant {
     public static String NUM_NOTIFICATION = "number notification";
     public static String SHARE_PREFERENCE = "my_data";
+    public static String IS_LOGIN = "isLogin";
+    public static String INTENT_USER_PHONE = "UserName";
+    public static String INTENT_PASSWORD = "Password";
+    public static String INTENT_TYPE_USER = "TypeOfUser";
+    public static String SHARE_USER_PHONE = "username";
+    public static String SHARE_PASSWORD = "password";
+    public static String SHARE_TYPE_USER = "typeOfUser";
+    public static String SHARE_IS_LOGIN = "isLogin";
 }

@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,16 +19,12 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import fanvu.easygoer.Constant;
-import fanvu.easygoer.TripInfo;
 import fanvu.easygoer.activity.ChatActivity;
 import fanvu.easygoer.adapter.AdapterListTrip;
 import fanvu.easygoer.asynctask.GcmSenderAsyncTask;
@@ -38,13 +33,19 @@ import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
 import fanvu.easygoer.config.Config;
 import fanvu.easygoer.gcm.R;
+import fanvu.easygoer.myinterface.ApiInterface;
 import fanvu.easygoer.mylistener.ItemTripClickListener;
+import fanvu.easygoer.object.ApiClient;
+import fanvu.easygoer.object.ListTripResponse;
+import fanvu.easygoer.object.TripInfo;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by framgia on 10/10/2016.
  */
 public class HomeFragment extends Fragment implements ItemTripClickListener {
-    ArrayList<TripInfo> LoginTripInfoArrayList = new ArrayList();
     ArrayList<TripInfo> SearchTripInfoArrayList = new ArrayList();
     private RecyclerView mRecyclerView;
     private AdapterListTrip mAdapterListTrip;
@@ -78,21 +79,18 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
         pDialog = new ProgressDialog(getActivity());
         pDialog.setTitle("Searching...");
         _checkConnect = new CheckConnect(getActivity());
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constant
-                    .SHARE_PREFERENCE,
-                Context.MODE_PRIVATE);
-            mUserName = sharedPreferences.getString("username", "");
-            mPassword = sharedPreferences.getString("password", "");
-            mTypeOfUser = sharedPreferences.getString("typeOfUser", "");
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            mRecyclerView.setLayoutManager(linearLayoutManager);
-            mAdapterListTrip = new AdapterListTrip(getActivity().getApplicationContext(),
-                LoginTripInfoArrayList);
-            mAdapterListTrip.setOnItemClickListener(this);
-            mRecyclerView.setAdapter(mAdapterListTrip);
-        }
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constant
+                .SHARE_PREFERENCE,
+            Context.MODE_PRIVATE);
+        mUserName = sharedPreferences.getString(Constant.SHARE_USER_PHONE, "");
+        mPassword = sharedPreferences.getString(Constant.SHARE_PASSWORD, "");
+        mTypeOfUser = sharedPreferences.getString(Constant.SHARE_TYPE_USER, "");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mAdapterListTrip = new AdapterListTrip(getActivity().getApplicationContext(),
+            SearchTripInfoArrayList);
+        mAdapterListTrip.setOnItemClickListener(this);
+        mRecyclerView.setAdapter(mAdapterListTrip);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -111,7 +109,7 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Gọi điện thoại: ");
         builder.setMessage(msg);
-        builder.setPositiveButton("Gọi", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.text_call, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
@@ -131,7 +129,7 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
                 }
             }
         });
-        builder.setNegativeButton("Bỏ qua", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.text_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -143,106 +141,31 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
     }
 
     private void doSearching() {
-        AsyncCallWS task = new AsyncCallWS();
-        task.execute();
-    }
-
-    private class AsyncCallWS extends AsyncTask<Void, Void, Void> {
-        private String Content;
-        private String Error = null;
-
-        @Override
-        protected void onPreExecute() {
-            pDialog.show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                Content = getRespose(Config.URL_WS + "mobile/authen");
-            } catch (Exception ex) {
-                Error = ex.getMessage();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            pDialog.dismiss();
-            if (Error != null) {
-                Toast.makeText(getActivity(), Error, Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    if (Content.equals("") || Content == null || Content.equals("-1") ||
-                        Content.contains("error")) {
-                        AlertDialog myErrorDialog =
-                            createDialogError("Tim kiem khong thanh cong " + Content);
-                        myErrorDialog.show();
-                    } else {
-                        JSONObject jsonResponse = new JSONObject(Content);
-                        SearchTripInfoArrayList.clear();
-                        if (jsonResponse.has("lstTrip")) {
-                            JSONArray jsonArray = jsonResponse.getJSONArray("lstTrip");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonTrip = jsonArray.getJSONObject(i);
-                                if (jsonTrip != null) {
-                                    TripInfo tripInfo = new TripInfo();
-                                    tripInfo.setTripId(jsonTrip.getString("tripId"));
-                                    tripInfo.setTripPrice(jsonTrip.getString("tripPrice"));
-                                    tripInfo.setTimeStart(jsonTrip.getString("timeStart"));
-                                    tripInfo.setPlaceStart(jsonTrip.getString("placeStart"));
-                                    tripInfo.setPlaceEnd(jsonTrip.getString("placeEnd"));
-                                    tripInfo.setNameDriver(jsonTrip.getString("nameDriver"));
-                                    tripInfo.setPhone(jsonTrip.getString("phone"));
-                                    tripInfo.setComment(jsonTrip.getString("comment"));
-                                    SearchTripInfoArrayList.add(tripInfo);
-                                }
-                            }
-                            mAdapterListTrip.mList = SearchTripInfoArrayList;
-                            mAdapterListTrip.notifyDataSetChanged();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public String getRespose(String url) {
-        String response = "";
-        try {
-            RestClient client = new RestClient(url);
-            client.AddHeader("username", mUserName);
-            client.AddHeader("password", mPassword);
-            client.AddHeader("wardid0", mSearchView.getQuery().toString());
-            client.AddHeader("wardid1", "");
-            client.AddHeader("wardid2", "");
-            try {
-                client.Execute(RequestMethod.POST);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            response = client.getResponse();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return response;
-    }
-
-    private AlertDialog createDialogError(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Thông báo");
-        builder.setMessage(msg);
-        builder.setCancelable(false);
-        builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+        pDialog.show();
+        ApiInterface apiService =
+            ApiClient.getClient().create(ApiInterface.class);
+        Call<ListTripResponse> call = apiService.getListTrip(mUserName
+            , mPassword
+            , mSearchView.getQuery().toString()
+            , ""
+            , "");
+        call.enqueue(new Callback<ListTripResponse>() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onResponse(Call<ListTripResponse> call,
+                                   Response<ListTripResponse> response) {
+                SearchTripInfoArrayList = (ArrayList) response.body().getResults();
+                mAdapterListTrip.mList = SearchTripInfoArrayList;
+                mAdapterListTrip.notifyDataSetChanged();
+                pDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ListTripResponse> call, Throwable t) {
+                pDialog.dismiss();
+                Toast.makeText(getActivity(), R.string.string_search_fail, Toast.LENGTH_SHORT)
+                    .show();
             }
         });
-        AlertDialog dialog = builder.create();
-        return dialog;
     }
 
     public void saveLogCallToServer(String mobileCustomer, String mobileDriver,
@@ -269,11 +192,12 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
     public void onItemClick(View view, int position) {
         switch (view.getId()) {
             case R.id.imgPhone:
-                Dialog dialog = createDialog(LoginTripInfoArrayList.get(position).getPhone());
+                Dialog dialog = createDialog(SearchTripInfoArrayList.get(position).getPhone());
                 dialog.show();
                 break;
             case R.id.btn_message:
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.putExtra(Constant.INTENT_USER_PHONE, mUserName);
                 startActivity(intent);
         }
     }

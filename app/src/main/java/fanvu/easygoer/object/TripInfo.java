@@ -1,23 +1,34 @@
-package fanvu.easygoer;
+package fanvu.easygoer.object;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 /**
  * Created by SONY on 1/17/2016.
  */
-
-
-public class TripInfo implements Serializable{
+public class TripInfo implements Serializable {
+    @SerializedName("tripId")
     private String tripId;
+    @SerializedName("tripPrice")
     private String tripPrice;
+    @SerializedName("timeStart")
     private String timeStart;
+    @SerializedName("placeStart")
     private String placeStart;
+    @SerializedName("placeEnd")
     private String placeEnd;
+    @SerializedName("nameDriver")
     private String nameDriver;
+    @SerializedName("phone")
     private String phone;
+    @SerializedName("comment")
     private String comment;
+    @SerializedName("regId")
+    private String registerId;
 
-    public TripInfo(String tripId, String tripPrice, String timeStart, String placeStart, String placeEnd, String nameDriver, String phone, String comment) {
+    public TripInfo(String tripId, String tripPrice, String timeStart, String placeStart,
+                    String placeEnd, String nameDriver, String phone, String comment) {
         this.tripPrice = tripPrice;
         this.tripId = tripId;
         this.timeStart = timeStart;
@@ -60,7 +71,6 @@ public class TripInfo implements Serializable{
     }
 
     public String getTripId() {
-
         return tripId;
     }
 
@@ -94,5 +104,13 @@ public class TripInfo implements Serializable{
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getRegisterId() {
+        return registerId;
+    }
+
+    public void setRegisterId(String registerId) {
+        this.registerId = registerId;
     }
 }
