@@ -10,6 +10,7 @@ public class Constant {
     public static String INTENT_USER_PHONE = "UserName";
     public static String INTENT_PASSWORD = "Password";
     public static String INTENT_TYPE_USER = "TypeOfUser";
+    public static String INTENT_REG_ID = "register_id";
     public static String SHARE_USER_PHONE = "username";
     public static String SHARE_PASSWORD = "password";
     public static String SHARE_TYPE_USER = "typeOfUser";

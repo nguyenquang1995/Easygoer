@@ -31,7 +31,16 @@ public class Controller extends Application{
     private  final int MAX_ATTEMPTS = 5;
     private  final int BACKOFF_MILLI_SECONDS = 2000;
     private  final Random random = new Random();
+    private static Context sContext;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sContext = this;
+    }
 
+    public static Context getInstanceContext() {
+        return sContext;
+    }
 
     // Register this account with the server.
     void register(final Context context, String name, String email,String mobile,String password, final String regId) {

@@ -10,4 +10,7 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="edt_spacing">50dp</dimen>
     <dimen name="edt_height">50dp</dimen>
+    <dimen name="chat_avatar_size">50dp</dimen>
+    <dimen name="chat_text_margin">150dp</dimen>
+    <dimen name="chat_text_space">20dp</dimen>
 </resources>

@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import fanvu.easygoer.gcm.GcmSender;
 
@@ -14,20 +12,23 @@ import fanvu.easygoer.gcm.GcmSender;
  * Created by framgia on 05/10/2016.
  */
 public class GcmSenderAsyncTask extends AsyncTask<Void, Void, Void> {
-    String[] args = {"PhanVV_Test_Hello", GcmSender.quang_reg_id};
-    private List<String> mStringList = new ArrayList<>();
+    private String message;
+    private String registerId;
+
+    public GcmSenderAsyncTask(String registerId, String message) {
+        this.registerId = registerId;
+        this.message = message;
+    }
+
     @Override
     protected Void doInBackground(Void... params) {
-        mStringList.add(GcmSender.quang_reg_id);
-        //GcmSender.sendMessage(args);
         try {
-            GcmSender.sendMessageToClient(args);
+            GcmSender.sendMessageToClient(registerId, message);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //GcmSender.sendToMobiles("PhanVV_Test_Hello", mStringList);
         return null;
     }
 }

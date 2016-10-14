@@ -33,16 +33,15 @@ public class GcmSender {
         "APA91bGnPR7VXg9I093WDmR0wHK3d5jcdfwlkcAbJIl5ijnq-60A7IG3TeShjseIP5R3EMaETrx7ME_GHvss-eQqU8oa2vb4E2oknB54Fz58BKDqx8PEjcE";
     public static final String API_KEY = "AIzaSyCqSs95yw1uqYXBd1-uOpU7xK0KWGAASlM";
 
-    public static void sendMessageToClient(String[] args)
+    public static void sendMessageToClient(String registerID, String message)
         throws JSONException, IOException {
         JSONObject jGcmData = new JSONObject();
         JSONObject jData = new JSONObject();
-        jData.put("message", args[0].trim());
-        if (args.length > 1 && args[1] != null) {
-            jGcmData.put("to", args[1].trim());
-        } else {
+        jData.put("message", message);
+        jGcmData.put("to", registerID);
+        /*else {
             jGcmData.put("to", "/topics/global");
-        }
+        }*/
         jGcmData.put("data", jData);
         URL url = new URL("https://android.googleapis.com/gcm/send");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

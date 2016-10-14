@@ -27,7 +27,6 @@ import java.util.Calendar;
 import fanvu.easygoer.Constant;
 import fanvu.easygoer.activity.ChatActivity;
 import fanvu.easygoer.adapter.AdapterListTrip;
-import fanvu.easygoer.asynctask.GcmSenderAsyncTask;
 import fanvu.easygoer.common.CheckConnect;
 import fanvu.easygoer.common.RequestMethod;
 import fanvu.easygoer.common.RestClient;
@@ -67,13 +66,6 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
     }
 
     private void init(View view) {
-        view.findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GcmSenderAsyncTask asyncTask = new GcmSenderAsyncTask();
-                asyncTask.execute();
-            }
-        });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
         mSearchView = (SearchView) view.findViewById(R.id.searchview);
         pDialog = new ProgressDialog(getActivity());
@@ -197,7 +189,10 @@ public class HomeFragment extends Fragment implements ItemTripClickListener {
                 break;
             case R.id.btn_message:
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
-                intent.putExtra(Constant.INTENT_USER_PHONE, mUserName);
+                intent.putExtra(Constant.INTENT_USER_PHONE, SearchTripInfoArrayList.get(position)
+                    .getPhone());
+                intent.putExtra(Constant.INTENT_REG_ID, SearchTripInfoArrayList.get(position)
+                    .getRegisterId());
                 startActivity(intent);
         }
     }

@@ -83,4 +83,5 @@
     <string name="text_call">Call</string>
     <string name="string_login_fail">Login fail</string>
     <string name="string_search_fail">Search fail</string>
+    <string name="string_write_message">Write message</string>
 </resources>

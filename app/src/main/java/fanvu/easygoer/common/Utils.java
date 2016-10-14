@@ -21,6 +21,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import fanvu.easygoer.Constant;
 import fanvu.easygoer.activity.NotificationActivity;
+import fanvu.easygoer.gcm.Config;
 import fanvu.easygoer.gcm.R;
 
 /**
@@ -116,5 +117,10 @@ public class Utils {
             return false;
         }
         return true;
+    }
+    public static void displayMessageOnScreen(Context context, String message) {
+        Intent intent = new Intent(Config.DISPLAY_MESSAGE_ACTION);
+        intent.putExtra(Config.EXTRA_MESSAGE, message);
+        context.sendBroadcast(intent);
     }
 }
