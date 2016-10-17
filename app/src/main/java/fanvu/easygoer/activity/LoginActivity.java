@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import fanvu.easygoer.Constant;
 import fanvu.easygoer.common.CheckConnect;
+import fanvu.easygoer.common.Utils;
 import fanvu.easygoer.gcm.R;
 import fanvu.easygoer.gcm.RegisterActivity;
 import fanvu.easygoer.myinterface.ApiInterface;
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Utils.addView(this);
         _context = LoginActivity.this;
         _checkConnect = new CheckConnect(_context);
         pDialog = new ProgressDialog(_context);

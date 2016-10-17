@@ -74,12 +74,17 @@ public class ChatActivity extends AppCompatActivity {
                 mList.add(messageObject);
                 mAdapterChat.mList = mList;
                 mAdapterChat.notifyDataSetChanged();
+                GcmSenderAsyncTask asyncTask = new GcmSenderAsyncTask(fanvu.easygoer.config
+                    .Config.nexus5regid, mEditText
+                    .getText().toString());
+                asyncTask.execute();
             }
         });
         findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GcmSenderAsyncTask asyncTask = new GcmSenderAsyncTask(mRegisterId, mEditText
+                GcmSenderAsyncTask asyncTask = new GcmSenderAsyncTask(fanvu.easygoer.config
+                    .Config.nexus422regid, mEditText
                     .getText().toString());
                 asyncTask.execute();
             }

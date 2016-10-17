@@ -10,7 +10,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -42,7 +41,7 @@ public class Utils {
         WindowManager windowManager = (WindowManager) context.getSystemService
             (Context.WINDOW_SERVICE);
         chatHead = new ImageView(context);
-        chatHead.setImageDrawable(drawNumber(context, number));
+        chatHead.setImageBitmap(drawNumber(context, number));
         chatHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,14 +63,14 @@ public class Utils {
         windowManager.addView(chatHead, params);
     }
 
-    public static BitmapDrawable drawNumber(Context context, int number) {
+    public static Bitmap drawNumber(Context context, int number) {
         String text;
         if (number < 100) {
             text = Integer.toString(number);
         } else {
             text = "99+";
         }
-        Bitmap result = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher)
+        Bitmap result = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher)
             .copy(Bitmap.Config.ARGB_8888, true);
         sBitmap = Bitmap.createBitmap(result.getWidth() + PADDING * 3, result.getHeight() +
                 PADDING * 3,
@@ -90,9 +89,9 @@ public class Utils {
         paint2.setTextSize(TEXT_SIZE);
         canvas.drawCircle(TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, paint2);
         canvas.drawText(text, PADDING / 2, TEXT_SIZE * 3 / 2, paint);
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), sBitmap);
+        // BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), sBitmap);
         result.recycle();
-        return bitmapDrawable;
+        return sBitmap;
     }
 
     public static void removeView(Context context) {
@@ -118,6 +117,7 @@ public class Utils {
         }
         return true;
     }
+
     public static void displayMessageOnScreen(Context context, String message) {
         Intent intent = new Intent(Config.DISPLAY_MESSAGE_ACTION);
         intent.putExtra(Config.EXTRA_MESSAGE, message);

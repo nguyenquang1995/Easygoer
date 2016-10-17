@@ -58,7 +58,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ChatViewHolder
         MessageObject messageObject = (MessageObject) mList.get(position);
         if (messageObject.getSender().equals(MessageObject.MY_OWN_MESSAGE)) {
             Glide.with(mContext)
-                .load(R.drawable.ic_launcher)
+                .load(R.mipmap.ic_launcher)
                 .bitmapTransform(new CropCircleTransformation(mContext))
                 .into(holder.avatar);
         } else {

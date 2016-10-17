@@ -12,11 +12,11 @@ public class Config {
     public static String Sub_version = "_build_01_30.12.14";
     public static int HTTP_TIME_OUT = 150 * 1000;
     public static int maximumPointCount = 30;
-//so luong point maximum truoc khi bi ngat thanh nhieu line
+    //so luong point maximum truoc khi bi ngat thanh nhieu line
     public static int minimumPointDistance = 1;
-//tham so ve duong, tinh bang met, khoang cach giua 2 diem lien tiep nho hon tham so nay thi khong lay
+    //tham so ve duong, tinh bang met, khoang cach giua 2 diem lien tiep nho hon tham so nay thi khong lay
     public static int maxmimunPointDistance = 100;
-// tham so ve duong, tinh bang met, khoang cach giua 2 diem lon hon tham so nay thi phai lay
+    // tham so ve duong, tinh bang met, khoang cach giua 2 diem lon hon tham so nay thi phai lay
     public static int deltaAngle = 10;//loai bo cac point co do chenh lech goc nho hon deltaAngle
     public static int maximumDistancePoint = 1000;
     /*
@@ -33,5 +33,9 @@ public class Config {
     public static String URL_PASSWORD = "brcd12345";
     public static String TAG_SEARCH = "mobile/authenUser";
     public static String TAG_LOGIN = "mobile/authen";
-
+    // test chat
+    public static String nexus422regid =
+        "APA91bGeid8i4T-HvDex9FczzZNmJVKwBIpb-a4Nf9wAKm1Y6KncbsfpdzJU2Qjyl9NG_vN8rk4xu22DtqHw8fGqs6SQBDqS_SR2js5vMJgc9S2hON7MhDo";
+    public static String nexus5regid =
+        "APA91bHiA7WSe3bb6qb3YtjbLZXLcep_DriEh0WG5XHqTRP686zDkEYd7W5yQTkrKzYJNR1SrJuBNaF2Cx7GpBTVr1k8wj5o02jbJh04UWuIOvmf-luxQhc";
 }
