@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,6 +20,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 import fanvu.easygoer.Constant;
+import fanvu.easygoer.Controller;
 import fanvu.easygoer.activity.NotificationActivity;
 import fanvu.easygoer.gcm.Config;
 import fanvu.easygoer.gcm.R;
@@ -29,12 +31,17 @@ import fanvu.easygoer.gcm.R;
 public class Utils {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static ImageView chatHead;
-    public static int CHAT_SIZE = 200;
-    public static int TEXT_SIZE = 300;
-    public static int PADDING = TEXT_SIZE / 2;
+    public static int CHAT_SIZE;
+    public static int TEXT_SIZE;
+    public static int CIRCLE_SIZE;
+    public static final int PADDING_CIRCLE = 20;
     public static Bitmap sBitmap;
 
-    public static void addView(final Context context) {
+    public static void addView() {
+        final Context context = Controller.getInstanceContext();
+        if (chatHead != null) {
+            removeView(context);
+        }
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constant
             .SHARE_PREFERENCE, Context.MODE_PRIVATE);
         int number = sharedPreferences.getInt(Constant.NUM_NOTIFICATION, 0);
@@ -52,9 +59,9 @@ public class Utils {
             }
         });
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-            CHAT_SIZE,
-            CHAT_SIZE,
-            WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT);
         params.gravity = Gravity.TOP | Gravity.LEFT;
@@ -72,24 +79,30 @@ public class Utils {
         }
         Bitmap result = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher)
             .copy(Bitmap.Config.ARGB_8888, true);
-        sBitmap = Bitmap.createBitmap(result.getWidth() + PADDING * 3, result.getHeight() +
-                PADDING * 3,
-            Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(sBitmap);
-        canvas.drawBitmap(result, PADDING, PADDING * 2, new Paint());
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(Color.WHITE);
-        paint.setAntiAlias(true);
-        paint.setTextSize(TEXT_SIZE);
+        CHAT_SIZE = result.getWidth();
+        TEXT_SIZE = CHAT_SIZE / 4;
         Paint paint2 = new Paint();
         paint2.setStyle(Paint.Style.FILL_AND_STROKE);
         paint2.setColor(Color.RED);
         paint2.setAntiAlias(true);
         paint2.setTextSize(TEXT_SIZE);
-        canvas.drawCircle(TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, paint2);
-        canvas.drawText(text, PADDING / 2, TEXT_SIZE * 3 / 2, paint);
-        // BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), sBitmap);
+        paint2.setTextAlign(Paint.Align.CENTER);
+        Rect bounds = new Rect();
+        paint2.getTextBounds(text, 0, text.length(), bounds);
+        CIRCLE_SIZE = bounds.width() / 2 + PADDING_CIRCLE;
+        sBitmap = Bitmap.createBitmap(result.getWidth() + CIRCLE_SIZE, result.getHeight() +
+                CIRCLE_SIZE,
+            Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(sBitmap);
+        canvas.drawBitmap(result, CIRCLE_SIZE, CIRCLE_SIZE, new Paint());
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setColor(Color.WHITE);
+        paint.setAntiAlias(true);
+        paint.setTextSize(TEXT_SIZE);
+        canvas.drawCircle(CIRCLE_SIZE, CIRCLE_SIZE, CIRCLE_SIZE, paint2);
+        canvas.drawText(text, CIRCLE_SIZE - bounds.width() / 2, CIRCLE_SIZE + bounds.height() / 2,
+            paint);
         result.recycle();
         return sBitmap;
     }
@@ -99,6 +112,7 @@ public class Utils {
             (Context.WINDOW_SERVICE);
         if (chatHead != null) {
             windowManager.removeView(chatHead);
+            Utils.sBitmap.recycle();
         }
     }
 

@@ -242,6 +242,6 @@ public class ListTripActivity extends AppCompatActivity {
                 return;
             }
         }
-        super.onBackPressed();
+        finish();
     }
 }

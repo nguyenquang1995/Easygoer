@@ -55,7 +55,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         String message = intent.getExtras().getString("message");
         Utils.displayMessageOnScreen(context, message);
         NotificationUtils.pushNotification(context, "new message", message);
-        Utils.addView(context);
+        Utils.addView();
     }
 
     /**
